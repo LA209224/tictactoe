@@ -2,6 +2,7 @@ import "dart:math";
 
 import "package:flutter/material.dart";
 import "package:tictactoe/model/Board.dart";
+import "package:tictactoe/model/Player.dart";
 
 class BoardScreen extends StatefulWidget {
   const BoardScreen({Key? key}) : super(key: key);
@@ -12,11 +13,14 @@ class BoardScreen extends StatefulWidget {
 
 class _BoardScreenState extends State<BoardScreen> {
   late Board board;
+  late Player player;
   late int nbCase = 4;
+
   @override
   void initState() {
     super.initState();
     board = Board(nbCase: nbCase);
+    player = Player("X");
   }
 
   @override
@@ -33,7 +37,7 @@ class _BoardScreenState extends State<BoardScreen> {
               return GestureDetector(
                   onTap: () {
                     setState(() {
-                      board.setPosition(index, "OK");
+                      board.setPosition(index, player.getPawn());
                     });
                   },
                   //Container qui contient la valeur de la case.
