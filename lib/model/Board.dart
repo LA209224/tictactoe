@@ -3,6 +3,7 @@ class Board {
   late List<String> board;
 
   Board({required this.nbCase}) {
+    //génére la liste avec nbCase*nbCase (vide)
     board = List.filled(nbCase * nbCase, "");
   }
 

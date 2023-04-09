@@ -4,8 +4,7 @@ import "package:flutter/material.dart";
 import "package:tictactoe/model/Board.dart";
 
 class BoardScreen extends StatefulWidget {
-  const BoardScreen({Key? key})
-      : super(key: key);
+  const BoardScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _BoardScreenState();
@@ -30,16 +29,25 @@ class _BoardScreenState extends State<BoardScreen> {
             crossAxisCount: nbCase,
             //Génére le nombre de Case dans la GridView, index = position de la case
             children: List.generate(nbCase * nbCase, (index) {
-              return Container(
-                color: Colors.red,
-                margin: const EdgeInsets.all(4),
-                child: Center(
-                  child: Text(
-                    board.getPosition(index),
-                    style: const TextStyle(fontSize: 32, color: Colors.white),
-                  ),
-                ),
-              );
+              //Détecte si le container à été touché
+              return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      board.setPosition(index, "OK");
+                    });
+                  },
+                  //Container qui contient la valeur de la case.
+                  child: Container(
+                    color: Colors.black12,
+                    margin: const EdgeInsets.all(4),
+                    child: Center(
+                      child: Text(
+                        board.getPosition(index),
+                        style:
+                            const TextStyle(fontSize: 32, color: Colors.white),
+                      ),
+                    ),
+                  ));
             })));
   }
 }
