@@ -1,13 +1,26 @@
+import 'package:tictactoe/model/EPawn.dart';
+
 class Player {
-  late String pawn;
+  late Pawn pawn;
+  late int scoore;
 
-  Player(this.pawn);
+  Player({required this.pawn}) {
+    scoore = 0;
+  }
 
-  String getPawn() {
+  Pawn getPawn() {
     return pawn;
   }
 
-  void setPawn(String pa) {
+  void setPawn(Pawn pa) {
     pawn = pa;
+  }
+
+  int getScoore() {
+    return scoore;
+  }
+
+  void setScoore(int sc) {
+    scoore = sc;
   }
 }

@@ -1,7 +1,6 @@
-import "dart:math";
-
 import "package:flutter/material.dart";
 import "package:tictactoe/model/Board.dart";
+import "package:tictactoe/model/EPawn.dart";
 import "package:tictactoe/model/Player.dart";
 
 class BoardScreen extends StatefulWidget {
@@ -22,14 +21,14 @@ class _BoardScreenState extends State<BoardScreen> {
   void initState() {
     super.initState();
     board = Board(nbCase: nbCase);
-    player = Player("X");
-    computer = Player("O");
+    player = Player(pawn: Pawn.X);
+    computer = Player(pawn: Pawn.O);
   }
 
   void play(int index) {
-    if (!isEndGame) {
+    if (board.getPosition(index) == "" && !isEndGame) {
       setState(() {
-        board.setPosition(index, player.getPawn());
+        board.setPosition(index, player.getPawn().getString());
         isEndGame = board.isEndGame(player, computer);
       });
       if (!isEndGame) {
@@ -38,10 +37,6 @@ class _BoardScreenState extends State<BoardScreen> {
           isEndGame = board.isEndGame(player, computer);
         });
       }
-    } else {
-      setState(() {
-        isEndGame = true;
-      });
     }
   }
 
@@ -80,6 +75,7 @@ class _BoardScreenState extends State<BoardScreen> {
                         ));
                   }))),
           Expanded(
+            //Affiche un bouton si la fin de la parti est vrai sinon il affiche le scoore
             child: isEndGame
                 ? Center(
                     child: ElevatedButton(
@@ -92,7 +88,10 @@ class _BoardScreenState extends State<BoardScreen> {
                       child: const Text('Rejouer'),
                     ),
                   )
-                : Center(),
+                : Center(
+                    child: Text(
+                        "${player.getPawn().getString()} ${player.getScoore()} - ${computer.getScoore()} ${computer.getPawn().getString()}"),
+                  ),
           ),
         ],
       ),
