@@ -23,6 +23,15 @@ class _BoardScreenState extends State<BoardScreen> {
     player = Player("X");
   }
 
+  void play(int index) {
+    if (board.getPosition(index) == "") {
+      setState(() {
+        board.setPosition(index, player.getPawn());
+        board.generateRandomPosition();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +46,7 @@ class _BoardScreenState extends State<BoardScreen> {
               return GestureDetector(
                   onTap: () {
                     setState(() {
-                      board.setPosition(index, player.getPawn());
+                      play(index);
                     });
                   },
                   //Container qui contient la valeur de la case.
