@@ -4,7 +4,11 @@ import "package:tictactoe/model/EPawn.dart";
 import "package:tictactoe/model/Player.dart";
 
 class BoardScreen extends StatefulWidget {
-  const BoardScreen({Key? key}) : super(key: key);
+  final int nbCase;
+  final Pawn pawn;
+
+  const BoardScreen({Key? key, required this.nbCase, required this.pawn})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _BoardScreenState();
@@ -20,9 +24,12 @@ class _BoardScreenState extends State<BoardScreen> {
   @override
   void initState() {
     super.initState();
-    board = Board(nbCase: nbCase);
-    player = Player(pawn: Pawn.X);
-    computer = Player(pawn: Pawn.O);
+    board = Board(nbCase: widget.nbCase);
+    player = Player(pawn: widget.pawn);
+    computer = Player(pawn: widget.pawn == Pawn.O ? Pawn.X : Pawn.O);
+    if (widget.pawn == Pawn.O) {
+      board.generateRandomPosition(computer.getPawn());
+    }
   }
 
   void play(int index) {
@@ -51,9 +58,10 @@ class _BoardScreenState extends State<BoardScreen> {
               flex: 3,
               child: GridView.count(
                   //Max de case par ligne
-                  crossAxisCount: nbCase,
+                  crossAxisCount: widget.nbCase,
                   //Génére le nombre de Case dans la GridView, index = position de la case
-                  children: List.generate(nbCase * nbCase, (index) {
+                  children:
+                      List.generate(widget.nbCase * widget.nbCase, (index) {
                     //Détecte si le container à été touché
                     return GestureDetector(
                         onTap: () {
@@ -63,7 +71,7 @@ class _BoardScreenState extends State<BoardScreen> {
                         },
                         //Container qui contient la valeur de la case.
                         child: Container(
-                          color: Colors.black12,
+                          color: isEndGame && board.isWinner(player) ? Colors.green : isEndGame && board.isWinner(computer) ? Colors.red : Colors.black12,
                           margin: const EdgeInsets.all(4),
                           child: Center(
                             child: Text(

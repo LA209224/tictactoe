@@ -17,6 +17,7 @@ class Player {
   }
 
   int getScoore() {
+    print(scoore.toString());
     return scoore;
   }
 
