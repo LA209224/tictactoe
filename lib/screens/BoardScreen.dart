@@ -71,7 +71,11 @@ class _BoardScreenState extends State<BoardScreen> {
                         },
                         //Container qui contient la valeur de la case.
                         child: Container(
-                          color: isEndGame && board.isWinner(player) ? Colors.green : isEndGame && board.isWinner(computer) ? Colors.red : Colors.black12,
+                          color: isEndGame && board.isWinner(player)
+                              ? Colors.green
+                              : isEndGame && board.isWinner(computer)
+                                  ? Colors.red
+                                  : Colors.black12,
                           margin: const EdgeInsets.all(4),
                           child: Center(
                             child: Text(
@@ -83,7 +87,7 @@ class _BoardScreenState extends State<BoardScreen> {
                         ));
                   }))),
           Expanded(
-            //Affiche un bouton si la fin de la parti est vrai sinon il affiche le scoore
+            //Affiche un bouton si la fin de la parti est vrai sinon il affiche le score
             child: isEndGame
                 ? Center(
                     child: ElevatedButton(
@@ -98,7 +102,7 @@ class _BoardScreenState extends State<BoardScreen> {
                   )
                 : Center(
                     child: Text(
-                        "${player.getPawn().getString()} ${player.getScoore()} - ${computer.getScoore()} ${computer.getPawn().getString()}"),
+                        "${player.getPawn().getString()} ${player.getScore()} - ${computer.getScore()} ${computer.getPawn().getString()}"),
                   ),
           ),
         ],

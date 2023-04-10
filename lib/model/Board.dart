@@ -55,7 +55,6 @@ class Board {
         }
       }
       if (line) {
-        player.setScoore(player.getScoore() + 1);
         return true;
       }
     }
@@ -70,7 +69,6 @@ class Board {
         }
       }
       if (col) {
-        player.setScoore(player.getScoore() + 1);
         return true;
       }
     }
@@ -84,7 +82,6 @@ class Board {
       }
     }
     if (diag1) {
-      player.setScoore(player.getScoore() + 1);
       return true;
     }
 
@@ -98,7 +95,6 @@ class Board {
       }
     }
     if (diag2) {
-      player.setScoore(player.getScoore() + 1);
       return true;
     }
 
@@ -108,10 +104,19 @@ class Board {
 
   //Vérifie si c'est la fin de partie
   bool isEndGame(Player p1, Player p2) {
-    if (isWinner(p1) || isWinner(p2) || !board.contains("")) {
+    if (isWinner(p1)) {
+      p1.setScore(p1.getScore() + 1);
+
       return true;
+    } else if (isWinner(p2)) {
+      p2.setScore(p2.getScore() + 1);
+
+      return true;
+    } else if (!board.contains("")) {
+      return true;
+    } else {
+      return false;
     }
-    return false;
   }
 
   //Remet les valeurs vides

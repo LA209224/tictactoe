@@ -2,10 +2,10 @@ import 'package:tictactoe/model/EPawn.dart';
 
 class Player {
   late Pawn pawn;
-  late int scoore;
+  late int score;
 
   Player({required this.pawn}) {
-    scoore = 0;
+    score = 0;
   }
 
   Pawn getPawn() {
@@ -16,12 +16,11 @@ class Player {
     pawn = pa;
   }
 
-  int getScoore() {
-    print(scoore.toString());
-    return scoore;
+  int getScore() {
+    return score;
   }
 
-  void setScoore(int sc) {
-    scoore = sc;
+  void setScore(int sc) {
+    score = sc;
   }
 }
